@@ -1,17 +1,24 @@
+import { ApolloProvider } from '@apollo/client/react';
+import { ReactKeycloakProvider } from '@react-keycloak/web';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import apolloClient from './apolloClient';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
+import './index.css';
 import keycloak from './keycloak';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ReactKeycloakProvider authClient={keycloak}>
-      <App />
-    </ReactKeycloakProvider>
+    <BrowserRouter>
+      <ReactKeycloakProvider authClient={keycloak}>
+        <ApolloProvider client={apolloClient}>
+          <App />
+        </ApolloProvider>
+      </ReactKeycloakProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
